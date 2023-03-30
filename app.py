@@ -22,6 +22,29 @@ def index():
     return render_template("index.html", result=result)
 
 
+@app.route("/images",methods = ["GET","POST"])
+def get_image_from_word():
+    if request.method == "GET":
+
+        response = openai.Image.create(
+            prompt="a white siamese cat",
+            n=1,
+            size="1024x1024"
+        )
+        image = response['data'][0]['url']
+        return render_template("index.html", image=image)
+
+    else :
+        animal = request.form["word"]
+        response = openai.Image.create(
+            prompt=animal,
+            n=1,
+            size="1024x1024"
+        )
+        image = response['data'][0]['url']
+        return render_template("index.html", image=image)
+
+
 def generate_prompt(animal):
     return """Suggest three names for an animal that is a superhero.
 

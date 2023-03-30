@@ -15,7 +15,20 @@
     <input type="text" name="animal" placeholder="Enter an animal" required />
     <input type="submit" value="Generate names" />
   </form>
-  {% if result %}
+    {% if result %}
   <div class="result">{{ result }}</div>
+  {% endif %}
+
+<br>
+   <h3>Create image from words</h3>
+  <form action="/images" method="post">
+    <input type="text" name="word" placeholder="Search for image" required />
+    <input type="submit" value="Get Image" />
+  </form>
+
+  {% if image %}
+  <div class="image">
+    <img src={{ image }} width="1024" height="1024">
+  </div>
   {% endif %}
 </body>
